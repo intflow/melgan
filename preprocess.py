@@ -22,7 +22,11 @@ def main(hp, args):
     wav_files = glob.glob(os.path.join(args.data_path, '**', '*.wav'), recursive=True)
 
     for wavpath in tqdm.tqdm(wav_files, desc='preprocess wav to mel'):
-        sr, wav = read_wav_np(wavpath)
+        try:
+            sr, wav = read_wav_np(wavpath)
+        except:
+            continue
+
         assert sr == hp.audio.sampling_rate, \
             "sample rate mismatch. expected %d, got %d at %s" % \
             (hp.audio.sampling_rate, sr, wavpath)
