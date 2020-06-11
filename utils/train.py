@@ -28,6 +28,7 @@ def train(args, pt_dir, chkpt_path, trainloader, valloader, writer, logger, hp, 
     step = 0
 
     if chkpt_path is not None:
+        print("Resuming from checkpoint: %s" % chkpt_path)
         logger.info("Resuming from checkpoint: %s" % chkpt_path)
         checkpoint = torch.load(chkpt_path)
         model_g.load_state_dict(checkpoint['model_g'])
@@ -36,6 +37,7 @@ def train(args, pt_dir, chkpt_path, trainloader, valloader, writer, logger, hp, 
         optim_d.load_state_dict(checkpoint['optim_d'])
         step = checkpoint['step']
         init_epoch = checkpoint['epoch']
+        print(init_epoch)
 
         if hp_str != checkpoint['hp_str']:
             logger.warning("New hparams is different from checkpoint. Will use new.")

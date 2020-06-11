@@ -1,8 +1,7 @@
 #!/bin/bash
 
-#python3 preprocess.py -c config/config.yaml -d ../datasets/kss
-#python3 preprocess.py -c config/config.yaml -d ../datasets/kss/val
+#python3 preprocess.py -c config/config_skylife.yaml -d ../datasets/skylife
+#python3 preprocess.py -c config/config_skylife.yaml -d ../datasets/skylife/val
 
-python3 trainer.py -c config/config.yaml -n kss &
-
-tensorboard --logdir logs/
+tensorboard --logdir logs/ &
+python3 trainer.py -c config/config_skylife.yaml -n skylife -p ../model_zoo/melgan_kss_aca5990_0750.pt
